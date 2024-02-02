@@ -13,26 +13,27 @@ targets = []
 
 # loop over the rows in our features CSV file
 for row in open(config.FEATURES_PATH):
-	# parse the row and extract (1) the target pixel value to predict
-	# along with (2) the 5x5=25 pixels which will serve as our feature
-	# vector
-	row = row.strip().split(",")
-	row = [float(x) for x in row]
-	target = row[0]
-	pixels = row[1:]
-	
-	# update our features and targets lists, respectively
-	features.append(pixels)
-	targets.append(target)
-	
+    # parse the row and extract (1) the target pixel value to predict
+    # along with (2) the 5x5=25 pixels which will serve as our feature
+    # vector
+    row = row.strip().split(",")
+    row = [float(x) for x in row]
+    target = row[0]
+    pixels = row[1:]
+
+    # update our features and targets lists, respectively
+    features.append(pixels)
+    targets.append(target)
+
 # convert the features and targets to NumPy arrays
 features = np.array(features, dtype="float")
 target = np.array(targets, dtype="float")
 
 # construct our training and testing split, using 75% of the data for
 # training and the remaining 25% for testing
-(trainX, testX, trainY, testY) = train_test_split(features, target,
-	test_size=0.25, random_state=42)
+(trainX, testX, trainY, testY) = train_test_split(
+    features, target, test_size=0.25, random_state=42
+)
 
 # train a random forest regressor on our data
 print("[INFO] training model...")
