@@ -5,6 +5,7 @@ __env__/
 
 # Config
 config*
+denoiser_config.py
 
 # Jupyter Notebook
 .ipynb_checkpoints

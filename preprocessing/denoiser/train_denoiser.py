@@ -1,8 +1,8 @@
 # import the necessary packages
-from config import denoise_config as config
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
+from denoiser_config import Config
 import numpy as np
 import pickle
 
@@ -12,6 +12,7 @@ features = []
 targets = []
 
 # loop over the rows in our features CSV file
+config = Config()
 for row in open(config.FEATURES_PATH):
     # parse the row and extract (1) the target pixel value to predict
     # along with (2) the 5x5=25 pixels which will serve as our feature

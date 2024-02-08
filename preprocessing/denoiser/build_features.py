@@ -6,26 +6,24 @@ import progressbar
 import random
 import cv2 as cv
 import os
+import sys
+from denoiser_config import Config
 
 # initialize the base path to the input documents dataset
-BASE_PATH = "denoising-dirty-documents"
-# define the path to the training directories
-TRAIN_PATH = os.path.sep.join([BASE_PATH, "train"])
-CLEANED_PATH = os.path.sep.join([BASE_PATH, "train_cleaned"])
+config = Config()
+test_dir = os.path.join(config.BASE_PATH, "test")
+train_dir = os.path.join(config.BASE_PATH, "train")
+train_cleaned_dir = os.path.join(config.BASE_PATH, "train_cleaned")
 
-# define the path to our output features CSV file then initialize
-# the sampling probability for a given row
-FEATURES_PATH = "features.csv"
-SAMPLE_PROB = 0.02
-# define the path to our document denoiser model
-MODEL_PATH = "denoiser.pickle"
+#trainPaths = [os.path.join(train_dir, file) for file in os.listdir(config.BASE_PATH) if file.endswith(".png")]
+#cleanedPaths = sorted(list(paths.list_images(CLEANED_PATH)))
 
-
+########
 # grab the paths to our training images
-trainPaths = sorted(list(paths.list_images(TRAIN_PATH)))
-cleanedPaths = sorted(list(paths.list_images(CLEANED_PATH)))
+trainPaths = sorted(list(paths.list_images(config.TRAIN_PATH)))
+cleanedPaths = sorted(list(paths.list_images(config.CLEANED_PATH)))
 # print the length of the lists to check if there are any images
-print("Number of training images:", len(TRAIN_PATH))
+print("Number of training images:", trainPaths)
 print("Number of cleaned images:", len(cleanedPaths))
 # initialize the progress bar
 widgets = [
@@ -42,7 +40,7 @@ pbar = progressbar.ProgressBar(maxval=len(trainPaths), widgets=widgets).start()
 # writing
 imagePaths = zip(trainPaths, cleanedPaths)
 # print("imagePaths size: {}".format(len(imagePaths)))
-csv = open(FEATURES_PATH, "w")
+csv = open(config.FEATURES_PATH, "w")
 # loop over the training images together
 for i, (trainPath, cleanedPath) in enumerate(imagePaths):
     print(i)
@@ -90,7 +88,7 @@ for i, (trainPath, cleanedPath) in enumerate(imagePaths):
             # we would end up with millions of rows -- let's only
             # write rows to disk with probability N, thereby reducing
             # the total number of rows in the file
-            if random.random() <= SAMPLE_PROB:
+            if random.random() <= config.SAMPLE_PROB:
                 # write the target and features to our CSV file
                 features = [str(x) for x in features]
                 row = [str(target)] + features
