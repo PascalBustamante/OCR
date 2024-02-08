@@ -1,6 +1,6 @@
 # import the necessary packages
 from config import denoise_config as config
-from data_manipulator.preprocessing.denoiser.utils.utils import blur_threshold
+from data_manager.preprocessing.denoiser.utils.utils import blur_threshold
 from imutils import paths
 
 import argparse

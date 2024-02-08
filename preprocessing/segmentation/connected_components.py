@@ -1,8 +1,29 @@
 # import the necessary packages
-import argparse
 import cv2
+import cv2 as cv
 import numpy as np
  
+def segment(thresh, kernel=None, ):
+	if kernel == None:
+		kernel = np.ones((3,5), np.uint8)
+	
+	# Perform dilation and erosion 
+
+	# Apply connected component analysis
+	output = cv.connectedComponentsWithStats(
+		thresh, 8, cv.CV_32S)
+	(numLabels, labels, stats, centroids) = output
+	
+	# The first component is usually
+	# the background and can safely skip it
+	for i in range(1, numLabels):
+		# Area con the component
+		area = stats[i, cv2.CC_STAT_AREA]
+
+		# Filter based on size
+
+
+
 
 # load the input image from disk, convert it to grayscale, and
 # threshold it
@@ -14,6 +35,8 @@ thresh = cv2.threshold(gray, 0, 255,
 
 kernel = np.ones((3,3), np.uint8)
 lines = cv2.erode(thresh, kernel, iterations=1)
+lines = cv2.dilate(lines, kernel, iterations=5)
+lines = cv2.GaussianBlur(lines, (5,5), 0)
 
 # apply connected component analysis to the thresholded image
 output = cv2.connectedComponentsWithStats(

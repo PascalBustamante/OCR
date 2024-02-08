@@ -7,7 +7,7 @@ class FeatureExtractor:
     def __init__(self) -> None:
         pass
 
-    def HOG(self, src):  ## Histogram of Oriented Gradients
+    def HOG(src):  ## Histogram of Oriented Gradients
         # Python gradient calculation
 
         # Read image
@@ -56,3 +56,10 @@ class FeatureExtractor:
 
         # The 'hog_features' now contains the HOG features for the image
         return hog_features
+
+
+path = r"C:\Users\pasca\Data Science\Math Notes Model\OCR\test_data\img_test.png"  ## For testing
+src = cv.imread(path)
+thinned = FeatureExtractor.HOG(src)
+cv.imshow("thinned", thinned)
+cv.waitKey()

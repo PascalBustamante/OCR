@@ -21,11 +21,13 @@ titles = ["Original Image", "Adaptive Gaussian Thresholding"]
 # images = [src, th3]
 
 padded_src = cv.copyMakeBorder(src, 1, 1, 1, 1, cv.BORDER_CONSTANT, value=0)
-gray_src = cv.cvtColor(src, cv.COLOR_RGB2GRAY)
+gray_src = cv.cvtColor(padded_src, cv.COLOR_RGB2GRAY)
 _, binary_src = cv.threshold(gray_src, 128, 255, cv.THRESH_BINARY_INV)
 
-thinned = cv.ximgproc.thinning(binary_src, thinningType=cv.ximgproc.THINNING_GUOHALL)
-thinned = thinned[1:-1, 1:-1]
+#thinned = cv.ximgproc.thinning(cv.cvtColor(src, cv.COLOR_RGB2GRAY))
+
+thinned = cv.ximgproc.thinning(binary_src, thinningType=cv.ximgproc.THINNING_ZHANGSUEN)
+thinned = 255 - thinned
 
 cv.imshow("thinned", thinned)
 
@@ -36,6 +38,6 @@ cv.imshow("thinned", thinned)
 # plt.show()
 
 
-cv.imshow("Skel", skel)
+#cv.imshow("Skel", skel)
 cv.waitKey(0)
 cv.destroyAllWindows()
