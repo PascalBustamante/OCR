@@ -26,7 +26,7 @@ denoiser_config.py
 # Data
 test_data/
 denoising-dirty-documents/
-
+.pickle
 features.csv
 
 # pycache
