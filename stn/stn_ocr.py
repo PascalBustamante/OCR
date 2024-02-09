@@ -24,9 +24,7 @@ if __name__ == "__main__":
     stn_obj = StnOcr(input_shape, nb_classes, detection_filter, recognition_filter)
     print(stn_obj)
 
-
-
-
+"""
 class StnOcr(nn.Module):
     def __init__(self, input_shape, nb_classes, detection_filter, recognition_filter):
         super(StnOcr, self).__init__()
@@ -94,7 +92,8 @@ class StnOcr(nn.Module):
         x = x.view(-1, self.num_steps, self.num_labels, 11)
         x = F.softmax(x, dim=-1)
         return x
-
+"""
+     
 if __name__ == "__main__":
     detection_filter = [32, 48, 48]
     recognition_filter = [32, 64, 128]
