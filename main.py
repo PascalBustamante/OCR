@@ -84,9 +84,10 @@ def hog_segmentation(image, orient, pix_per_cell, cell_per_block, threshold):
 
 
 # Read in the image
-image = mpimg.imread(
-    r"C:\Users\pasca\Data Science\Math Notes Model\STN\test_data\math_example.png"
-)
+image = cv2.imread(r"C:\Users\pasca\Data Science\Math Notes Model\OCR\test_data\math_example.png")
+#image = mpimg.imread(
+    #r"C:\Users\pasca\Data Science\Math Notes Model\OCR\test_data\math_example.png"
+#)
 # Set parameters for HOG segmentation
 orient = 9
 pix_per_cell = 8

@@ -54,7 +54,7 @@ class DatabaseManager:
 
 class DataSample:
     ""
-    def __init__(self, filenames: [str], connection=None) -> None:
+    def __init__(self, filenames, connection=None) -> None:
         self._filenames = []
         self._connection = connection
         self.data_block = []
