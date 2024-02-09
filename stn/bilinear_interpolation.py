@@ -44,7 +44,7 @@ def bilinear_sampler(img, x, y):
     - out: interpolated images according to grids. Same size as grid.
     """
     B, C, H, W = img.size()
-    
+
     # rescale x and y to [0, W-1/H-1]
     x = 0.5 * ((x + 1.0) * (W - 1))
     y = 0.5 * ((y + 1.0) * (H - 1))
@@ -77,3 +77,7 @@ def bilinear_sampler(img, x, y):
     out = wa * Ia + wb * Ib + wc * Ic + wd * Id
 
     return out
+
+if __name__=="__main__":
+    img = cv2.imread()
+    bilinear_sampler()

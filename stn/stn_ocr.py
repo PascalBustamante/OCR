@@ -2,6 +2,31 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from resnet import ResNet
+
+class StnOcr(ResNet):
+    def __init__(self, input_shape, nb_classes, detection_filter, recognition_filter):
+        super(StnOcr, self).__init__(input_shape, nb_classes)
+        self.num_labels = 3
+        self.num_steps = 1
+        self.detection_filter = detection_filter
+        self.recognition_filter = recognition_filter
+
+    def forward(self, x, flag='detection'):
+        # Define the forward pass logic here
+        pass
+
+if __name__ == "__main__":
+    input_shape = (3, 224, 224)  # Example input shape
+    nb_classes = 1000  # Example number of classes
+    detection_filter = [32, 48, 48]  # Example detection filter sizes
+    recognition_filter = [32, 64, 128]  # Example recognition filter sizes
+    stn_obj = StnOcr(input_shape, nb_classes, detection_filter, recognition_filter)
+    print(stn_obj)
+
+
+
+
 class StnOcr(nn.Module):
     def __init__(self, input_shape, nb_classes, detection_filter, recognition_filter):
         super(StnOcr, self).__init__()
